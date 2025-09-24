@@ -1,0 +1,31 @@
+/* Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Set a default height for the map container */
+#map {
+    height: 100%;
+    min-height: 600px;
+    border-radius: 0.5rem;
+    z-index: 10;
+}
+.leaflet-container {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Tab content styling */
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+
+/* Custom tab button styles */
+.tab-button {
+    transition: all 0.2s ease-in-out;
+}
+.tab-button.active {
+    transform: translateY(-1px);
+}

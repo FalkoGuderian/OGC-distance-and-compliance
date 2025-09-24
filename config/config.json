@@ -1,0 +1,146 @@
+{
+  "servers": {
+    "bkgVerwaltungsgebiete": {
+      "url": "https://sgx.geodatenzentrum.de/wfs_vg250",
+      "type": "json",
+      "outputFormat": "application/gml+xml; version=3.2",
+      "description": "Verwaltungsgebiete (Bundesamt für Kartographie und Geodäsie)",
+      "layers": {
+        "vg250:vg250_gem": "Gemeinden",
+        "vg250:vg250_krs": "Kreise",
+        "vg250:vg250_lan": "Bundesländer",
+        "vg250:vg250_sta": "Staaten",
+        "vg250:vg250_rbz": "Regierungsbezirke",
+        "vg250:vg250_vwg": "Verwaltungsgemeinschaften",
+        "vg250:vg250_pk": "Gemeindepunkte",
+        "vg250:vg250_li": "Grenzlinien"
+      }
+    },
+    "bfnSchutzgebiete": {
+      "url": "https://geodienste.bfn.de/ogc/wfs/schutzgebiet",
+      "type": "xml",
+      "outputFormat": "application/gml+xml; version=3.2",
+      "description": "Schutzgebiete (Bundesamt für Naturschutz)",
+      "layers": {
+        "bfn_sch_Schutzgebiet:Nationale_Naturmonumente": "Nationale Naturmonumente",
+        "bfn_sch_Schutzgebiet:Fauna_Flora_Habitat_Gebiete": "Fauna-Flora-Habitat-Gebiete",
+        "bfn_sch_Schutzgebiet:Vogelschutzgebiete": "Vogelschutzgebiete",
+        "bfn_sch_Schutzgebiet:Biosphaerenreservate": "Biosphärenreservate",
+        "bfn_sch_Schutzgebiet:Biosphaerenreservate_Zonierung": "Biosphärenreservate - Zonierung",
+        "bfn_sch_Schutzgebiet:Nationalparke": "Nationalparke",
+        "bfn_sch_Schutzgebiet:Naturparke": "Naturparke",
+        "bfn_sch_Schutzgebiet:Naturschutzgebiete": "Naturschutzgebiete",
+        "bfn_sch_Schutzgebiet:Landschaftsschutzgebiete": "Landschaftsschutzgebiete"
+      }
+    },
+    "LandschaftsmodellSGX": {
+      "url": "https://sgx.geodatenzentrum.de/wfs_dlm250_inspire",
+      "type": "xml",
+      "outputFormat": "application/gml+xml; version=3.2",
+      "description": "DLM250 INSPIRE (SGX Geodatenzentrum)",
+      "layers": {
+        "hy-p:Crossing": "Crossing",
+        "hy-p:DamOrWeir": "Dam or Weir",
+        "hy-p:Embankment": "Embankment",
+        "hy-p:Falls": "Falls",
+        "hy-p:LandWaterBoundary": "Land Water Boundary",
+        "hy-p:Lock": "Lock",
+        "hy-p:Shore": "Shore",
+        "hy-p:ShorelineConstruction": "Shoreline Construction",
+        "hy-p:StandingWater": "Standing Water",
+        "hy-p:Watercourse": "Watercourse",
+        "hy-p:Wetland": "Wetland",
+        "hy-n:HydroNode": "Hydro Node",
+        "hy-n:WatercourseLink": "Watercourse Link",
+        "tn-a:AerodromeArea": "Aerodrome Area",
+        "tn-a:AerodromeCategory": "Aerodrome Category",
+        "tn-a:AerodromeNode": "Aerodrome Node",
+        "tn-a:AerodromeType": "Aerodrome Type",
+        "tn-a:ConditionOfAirFacility": "Condition of Air Facility",
+        "tn-a:FieldElevation": "Field Elevation",
+        "elf-tn-a:AerodromeArea": "Aerodrome Area",
+        "elf-tn-a:AerodromeNode": "Aerodrome Node",
+        "elf-tn-a:FunctionalUseCategory": "Functional Use Category",
+        "elf-tn-a:RunwayLine": "Runway Line",
+        "elf-tn-a:TransportationUseCategory": "Transportation Use Category",
+        "tn-ra:DesignSpeed": "Design Speed",
+        "tn-ra:NominalTrackGauge": "Nominal Track Gauge",
+        "tn-ra:NumberOfTracks": "Number of Tracks",
+        "tn-ra:RailwayElectrification": "Railway Electrification",
+        "tn-ra:RailwayLine": "Railway Line",
+        "tn-ra:RailwayLink": "Railway Link",
+        "tn-ra:RailwayNode": "Railway Node",
+        "tn-ra:RailwayStationCode": "Railway Station Code",
+        "tn-ra:RailwayStationNode": "Railway Station Node",
+        "tn-ra:RailwayType": "Railway Type",
+        "tn-ra:RailwayUse": "Railway Use",
+        "elf-tn-ra:DesignSpeed": "Design Speed",
+        "elf-tn-ra:RailwayClass": "Railway Class",
+        "elf-tn-ra:RailwayElectrification": "Railway Electrification",
+        "elf-tn-ra:RailwayLink": "Railway Link",
+        "elf-tn-ra:RailwayStationNode": "Railway Station Node",
+        "tn-ro:ERoad": "ERoad",
+        "tn-ro:FormOfWay": "Form of Way",
+        "tn-ro:FunctionalRoadClass": "Functional Road Class",
+        "tn-ro:NumberOfLanes": "Number of Lanes",
+        "tn-ro:Road": "Road",
+        "tn-ro:RoadLink": "Road Link",
+        "tn-ro:RoadNode": "Road Node",
+        "tn-ro:RoadServiceType": "Road Service Type",
+        "tn-ro:RoadSurfaceCategory": "Road Surface Category",
+        "elf-tn-ro:InterchangePoint": "Interchange Point",
+        "elf-tn-ro:RoadLink": "Road Link",
+        "tn-w:ConditionOfWaterFacility": "Condition of Water Facility",
+        "tn-w:FerryCrossing": "Ferry Crossing",
+        "tn-w:PortArea": "Port Area",
+        "tn-w:PortNode": "Port Node",
+        "elf-tn-w:FerryCrossing": "Ferry Crossing",
+        "elf-tn-w:PortArea": "Port Area",
+        "elf-tn-w:PortNode": "Port Node",
+        "elf-tn-w:PortType": "Port Type",
+        "tn:AccessRestriction": "Access Restriction",
+        "tn:ConditionOfFacility": "Condition of Facility",
+        "tn:VerticalPosition": "Vertical Position",
+        "au:AdministrativeBoundary": "Administrative Boundary",
+        "au:AdministrativeUnit": "Administrative Unit",
+        "elf-au:AdministrativeUnit": "Administrative Unit",
+        "elf-au:AdministrativeUnitArea": "Administrative Unit Area",
+        "ps:ProtectedSite": "Protected Site"
+      }
+    }
+  },
+  "defaultSettings": {
+    "maxSearchDistance": 1000000,
+    "maxFeatures": 100,
+    "batchSize": 5000,
+    "defaultServer": "bkgVerwaltungsgebiete",
+    "defaultLayer": "vg250:vg250_gem",
+    "defaultCoordinates": {
+      "lat": 51.0036,
+      "lon": 13.8713
+    }
+  },
+  "complianceRules": [
+    {
+      "id": "protect-area-distance",
+      "name": "Mindestabstand zu Schutzgebieten",
+      "description": "Objekt muss mindestens 1000m entfernt von einem Schutzgebiet oder einer Ortschaft sein.",
+      "type": "distance",
+      "minDistance": 1000,
+      "layerTypes": ["Naturschutzgebiete", "Vogelschutzgebiete", "Nationalparke"]
+    },
+    {
+      "id": "settlement-distance",
+      "name": "Mindestabstand zu Ortschaften",
+      "description": "Objekt muss mindestens 500m entfernt von bewohnten Gebieten sein.",
+      "type": "distance",
+      "minDistance": 500,
+      "layerTypes": ["Gemeinden"]
+    }
+  ],
+  "ai": {
+    "openRouterModel": "x-ai/grok-4-fast",
+    "maxTokens": 800,
+    "temperature": 0.1
+  }
+}

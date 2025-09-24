@@ -1,0 +1,57 @@
+/* Tailwind CSS is loaded via CDN, only custom styles here */
+
+/* Set a default height for the map container */
+#map {
+    height: 100%;
+    min-height: 600px;
+    border-radius: 0.5rem;
+    z-index: 10;
+}
+.leaflet-container {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Tab content styling */
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+
+/* Tab navigation layout - ensure flexbox works */
+nav[aria-label="Tabs"] {
+    display: flex;
+    gap: 0;
+}
+
+/* Custom tab button styles */
+.tab-button {
+    flex: 1 1 0%;
+    padding: 1rem 1rem;
+    text-align: center;
+    border-bottom-width: 2px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    border-bottom-style: solid;
+    color: #6b7280; /* text-gray-500 */
+    border-bottom-color: transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.tab-button:hover {
+    color: #374151; /* text-gray-700 */
+    border-bottom-color: #d1d5db; /* border-gray-300 */
+}
+
+.tab-button:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.tab-button.active {
+    color: #374151; /* text-gray-700 */
+    border-bottom-color: #374151; /* border-gray-700 */
+    transform: translateY(-1px);
+}

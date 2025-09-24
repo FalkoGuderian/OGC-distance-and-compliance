@@ -1,0 +1,100 @@
+{
+  "defaultSettings": {
+    "maxSearchDistance": 1000,
+    "maxFeatures": 100,
+    "batchSize": 1000,
+    "defaultServer": "bkgVerwaltungsgebiete",
+    "defaultLayer": "vg250:vg250_gem",
+    "defaultCoordinates": {
+      "lat": 51.0036,
+      "lon": 13.8713
+    }
+  },
+  "servers": {
+    "bkgVerwaltungsgebiete": {
+      "url": "https://sgx.geodatenzentrum.de/wfs_vg250",
+      "description": "Verwaltungsgebiete (BKG)",
+      "outputFormat": "application/json",
+      "layers": {
+        "vg250:vg250_gem": "Gemeinden",
+        "vg250:vg250_krs": "Kreise",
+        "vg250:vg250_lan": "Bundesländer",
+        "vg250:vg250_sta": "Staaten",
+        "vg250:vg250_rbz": "Regierungsbezirke",
+        "vg250:vg250_vwg": "Verwaltungsgemeinschaften",
+        "vg250:vg250_pk": "Gemeindepunkte",
+        "vg250:vg250_li": "Grenzlinien"
+      }
+    },
+    "bfnSchutzgebiete": {
+      "url": "https://geodienste.bfn.de/ogc/wfs/schutzgebiet",
+      "description": "Schutzgebiete (BfN)",
+      "outputFormat": "application/gml+xml; version=3.2",
+      "layers": {
+        "bfn_sch_Schutzgebiet:Nationale_Naturmonumente": "Nationale Naturmonumente",
+        "bfn_sch_Schutzgebiet:Fauna_Flora_Habitat_Gebiete": "Fauna-Flora-Habitat-Gebiete",
+        "bfn_sch_Schutzgebiet:Vogelschutzgebiete": "Vogelschutzgebiete",
+        "bfn_sch_Schutzgebiet:Biosphaerenreservate": "Biosphärenreservate",
+        "bfn_sch_Schutzgebiet:Biosphaerenreservate_Zonierung": "Biosphärenreservate - Zonierung",
+        "bfn_sch_Schutzgebiet:Nationalparke": "Nationalparke",
+        "bfn_sch_Schutzgebiet:Naturparke": "Naturparke",
+        "bfn_sch_Schutzgebiet:Naturschutzgebiete": "Naturschutzgebiete",
+        "bfn_sch_Schutzgebiet:Landschaftsschutzgebiete": "Landschaftsschutzgebiete"
+      }
+    },
+    "sgxInspire": {
+      "url": "https://sgx.geodatenzentrum.de/wfs_dlm250_inspire",
+      "description": "Landschaftsmodell (INSPIRE)",
+      "outputFormat": "application/gml+xml; version=3.2",
+      "layers": {
+        "hy-p:Crossing": "Kreuzung",
+        "hy-p:DamOrWeir": "Damm oder Wehr",
+        "hy-p:Embankment": "Uferverbauung",
+        "hy-p:Falls": "Wasserfälle",
+        "hy-p:LandWaterBoundary": "Land-Wasser-Grenze",
+        "hy-p:Lock": "Schleuse",
+        "hy-p:Shore": "Ufer",
+        "hy-p:ShorelineConstruction": "Uferbauwerke",
+        "hy-p:StandingWater": "Stehendes Gewässer",
+        "hy-p:Watercourse": "Wasserlauf",
+        "hy-p:Wetland": "Feuchtgebiet",
+        "hy-n:HydroNode": "Hydro-Knoten",
+        "hy-n:WatercourseLink": "Wasserlauf-Verbindung",
+        "tn-a:AerodromeArea": "Flugplatzbereich",
+        "tn-a:AerodromeCategory": "Flugplatz-Kategorie",
+        "tn-a:AerodromeNode": "Flugplatz-Knoten",
+        "tn-a:AerodromeType": "Flugplatz-Typ",
+        "tn-ra:RailwayStationNode": "Bahnhofs-Knoten",
+        "tn-ro:Road": "Straße",
+        "tn-ro:RoadLink": "Straßen-Verbindung",
+        "tn-ro:RoadNode": "Straßen-Knoten",
+        "au:AdministrativeBoundary": "Verwaltungsgrenze",
+        "au:AdministrativeUnit": "Verwaltungseinheit",
+        "ps:ProtectedSite": "Schutzgebiet"
+      }
+    }
+  },
+  "complianceRules": {
+    "default": {
+      "name": "Standard Abstandsregel",
+      "description": "Objekt muss mindestens 1000m entfernt von einem Schutzgebiet oder einer Ortschaft sein.",
+      "rule": "Objekt muss mindestens 1000m entfernt von einem Schutzgebiet oder einer Ortschaft sein."
+    },
+    "strict": {
+      "name": "Strenge Abstandsregel",
+      "description": "Objekt muss mindestens 2000m entfernt von allen Schutzgebieten sein.",
+      "rule": "Objekt muss mindestens 2000m entfernt von allen Schutzgebieten sein."
+    }
+  },
+  "ai": {
+    "models": {
+      "primary": "x-ai/grok-4-fast",
+      "fallback": "anthropic/claude-3-haiku"
+    },
+    "temperature": 0.1,
+    "maxTokens": {
+      "parameterExtraction": 500,
+      "complianceCheck": 800
+    }
+  }
+}

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGC Abstandsmessung mit KI-Assistenz und Prüfvorschrift</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Inline critical CSS for tab styling -->
+    <style>
+        /* Tab navigation layout - ensure flexbox works */
+        nav[aria-label="Tabs"] {
+            display: flex !important;
+            gap: 0 !important;
+        }
+
+        /* Critical tab button styles */
+        .tab-button {
+            flex: 1 1 0% !important;
+            padding: 1rem 1rem !important;
+            text-align: center !important;
+            border-bottom-width: 2px !important;
+            font-weight: 500 !important;
+            font-size: 0.875rem !important;
+            line-height: 1.25rem !important;
+            border-bottom-style: solid !important;
+            color: #6b7280 !important;
+            border-bottom-color: transparent !important;
+            transition: all 0.2s ease-in-out !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .tab-button svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+            margin-right: 0.5rem !important;
+            flex-shrink: 0 !important;
+        }
+
+        .tab-button:hover {
+            color: #374151 !important;
+            border-bottom-color: #d1d5db !important;
+        }
+
+        .tab-button:focus {
+            outline: 2px solid transparent !important;
+            outline-offset: 2px !important;
+        }
+
+        .tab-button.active {
+            color: #374151 !important;
+            border-bottom-color: #374151 !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .tab-content {
+            display: none !important;
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        .sm\:inline {
+            display: none !important;
+        }
+
+        @media (min-width: 640px) {
+            .sm\:inline {
+                display: inline !important;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+
+    <!-- Basic JavaScript test -->
+    <script>
+        console.log('Basic inline script loaded');
+        console.log('Testing basic JS functionality');
+        // Test that JavaScript can execute
+        try {
+            console.log('window object:', typeof window);
+            console.log('document object:', typeof document);
+        } catch(e) {
+            console.error('Basic JS error:', e);
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-[Inter] text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <!-- Header Section with enhanced features from new version -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex-1">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">OGC-basierte Objektsuche und Prüfung</h1>
+                    <p class="text-gray-600">Finden und analysieren Sie geografische Objekte aus OGC WFS-Diensten in der Umgebung eines Standpunktes. Nutzen Sie den KI-Suchassistenten für natürlichsprachige Anfragen und lassen Sie automatisch Compliance-Prüfungen durchführen.</p>
+                </div>
+                <button
+                    id="quickstart-btn"
+                    class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors flex-shrink-0 mr-2"
+                    title="Schnellstart-Anleitung"
+                >
+                    Quick-Start
+                </button>
+                <button
+                    id="main-help-btn"
+                    class="p-3 rounded-lg hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-700 flex-shrink-0"
+                    title="Haupt-Hilfe und Features"
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main 2-Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+            <!-- Left Column: Tabbed Interface (30-40% width) -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
+
+                <!-- Tab Navigation -->
+                <div class="border-b border-gray-200">
+                    <nav class="flex space-x-0" aria-label="Tabs">
+                        <button id="tab-ai" class="tab-button flex-1 py-4 px-4 text-center border-b-2 font-medium text-sm focus:outline-none transition-colors bg-indigo-50 border-indigo-500 text-indigo-600 active transform translateY-0.5" onclick="switchTab('ai')" title="Suchassistent: Natürlichsprachige Anweisungen und automatische Parameter-Extraktion mit Voice-Input">
+                            <div class="flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                                <span class="hidden sm:inline">Suchassistent</span>
+                            </div>
+                        </button>
+                        <button id="tab-manual" class="tab-button flex-1 py-4 px-4 text-center border-b-2 font-medium text-sm focus:outline-none transition-colors text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300" onclick="switchTab('manual')" title="Manuelle Eingabe: Manuelle Konfiguration von Server, Koordinaten und Suchparametern">
+                            <div class="flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                </svg>
+                                <span class="hidden sm:inline">Manuelle Eingabe</span>
+                            </div>
+                        </button>
+                        <button id="tab-compliance" class="tab-button flex-1 py-4 px-4 text-center border-b-2 font-medium text-sm focus:outline-none transition-colors text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300" onclick="switchTab('compliance')" title="Prüfvorschrift: Definition und automatische Compliance-Bewertung der Messergebnisse">
+                            <div class="flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5-3L9 22l-6-6 11-11z"></path>
+                                </svg>
+                                <span class="hidden sm:inline">Prüfvorschrift</span>
+                            </div>
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Tab Contents -->
+                <div class="p-6">
+
+                    <!-- Tab 1: AI Assistant with all enhanced features -->
+                    <div id="content-ai" class="tab-content active">
+                        <div class="space-y-4">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-purple-100 p-2 rounded-lg mr-3">
+                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                </div>
+                                <h2 class="text-xl font-bold text-gray-900">Orte suchen und prüfen</h2>
+                            </div>
+
+
+                        <div>
+                            <label for="ai-instruction" class="block text-sm font-medium text-gray-700 mb-1">Suchanfrage</label>
+                            <div class="relative">
+                                <textarea id="ai-instruction" rows="4" class="w-full px-3 py-2 pr-20 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 bg-white resize-none" placeholder="Suche nächstes Objekt am Standort Dresden innerhalb 5000 Metern von einem Naturschutzgebiet oder Hafen"></textarea>
+                                <button
+                                    type="button"
+                                    id="speak-instruction-btn"
+                                    class="absolute right-2 top-2 p-1 rounded-full bg-blue-500 hover:bg-blue-600 transition-all duration-200"
+                                    title="Frage vorlesen"
+                                >
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 11v2c0 1.1.9 2 2 2h2.1l5.9 4V7l-5.9 4H5c-1.1 0-2 .9-2 2z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8c1.5 1 1.5 5 0 6"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 6c2.5 1.5 2.5 8.5 0 10"/>
+                                    </svg>
+                                </button>
+                                <button
+                                    type="button"
+                                    id="voice-instruction-btn"
+                                    class="absolute right-10 top-2 p-1 rounded-full bg-purple-500 hover:bg-purple-600 transition-all duration-200"
+                                    title="Spracheingabe für Anweisungen verwenden"
+                                >
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">
+                                Beschreiben Sie Ihre Anfrage in natürlicher Sprache. Die KI wird automatisch die Parameter extrahieren.
+                                <button
+                                    type="button"
+                                    id="ai-help-btn"
+                                    class="text-purple-600 hover:text-purple-700 underline text-xs ml-2"
+                                    title="KI-Hilfe anzeigen"
+                                >
+                                    Hilfe
+                                </button>
+                            </p>
+                        </div>
+
+                            <div id="voice-recording-status" class="hidden mt-2 flex items-center gap-2 text-purple-600 bg-purple-50 p-2 rounded-lg">
+                                <svg class="w-4 h-4 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="8"></circle>
+                                </svg>
+                                <span class="text-sm font-medium">Aufnahme läuft... <span id="recording-timer">0</span>s</span>
+                                <button
+                                    id="stop-voice-btn"
+                                    class="ml-auto text-purple-700 hover:text-purple-800 font-medium text-sm"
+                                >
+                                    Stop
+                                </button>
+                            </div>
+
+                            <div id="voice-speaking-status" class="hidden mt-2 flex items-center gap-2 text-blue-600 bg-blue-50 p-2 rounded-lg">
+                                <svg class="w-4 h-4 animate-pulse text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="8"></circle>
+                                </svg>
+                                <span class="ml-1 text-xs text-blue-600 font-medium">Sprachausgabe aktiv...</span>
+                            </div>
+
+                            <div class="flex items-center space-x-4">
+                                <button type="button" id="process-ai-instruction" class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:from-purple-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                    Starten
+                                </button>
+                                <div id="ai-status" class="text-sm text-gray-600"></div>
+                            </div>
+
+                            <div class="mt-4">
+                                <label for="mistral-api-key" class="block text-sm font-medium text-gray-700 mb-1">OpenRouter API-Key <span class="text-xs text-red-500">*</span></label>
+                                <input type="password" id="mistral-api-key" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 bg-white" placeholder="sk-or-v1-..." autocomplete="off">
+                                <p class="text-xs text-gray-500 mt-1">
+                                    Erforderlich für KI-Analyse. <a href="https://openrouter.ai/docs" target="_blank" class="text-purple-600 hover:text-purple-700 underline">API-Key bei OpenRouter erstellen</a>
+                                </p>
+                            </div>
+
+                            <div id="ai-result" class="hidden mt-4 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+                                <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                    <span>🧠 KI-Analyse</span>
+                                    <button
+                                        id="download-ai-result-btn"
+                                        class="ml-auto text-gray-400 hover:text-gray-600"
+                                        title="Ergebnis herunterladen"
+                                    >
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                    </button>
+                                </h4>
+                                <div id="ai-result-content" class="text-sm text-gray-700"></div>
+                            </div>
+
+                            <div id="ai-help-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+                                <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+                                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-4 text-white">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-lg font-semibold">KI-Assistent Hilfe</h3>
+                                            <button id="close-ai-help-btn" class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-1">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="p-6 overflow-y-auto max-h-[60vh]">
+                                            <div class="space-y-4">
+                                                <div>
+                                                    <h4 class="font-semibold text-gray-900 mb-2">Natürliche Sprachbefehle:</h4>
+                                                    <ul class="text-sm text-gray-700 space-y-1 ml-4">
+                                                        <li>"Prüfe Abstand zu Naturschutzgebiet bei Koordinaten [13.xxxx, 51.xxxx]"</li>
+                                                        <li>"Ist das Objekt in 1000m Entfernung zu einem Schutzgebiet?"</li>
+                                                        <li>"Analysiere Distanz zu Gemeindegrenzen für Punkt [lon, lat]"</li>
+                                                        <li>"Finde nahe Schutzgebiete innerhalb 5000m um [13.xxxx, 51.xxxx]"</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="bg-purple-50 border-l-4 border-purple-400 p-3">
+                                                    <p class="text-sm text-purple-700">
+                                                        <strong>Sprachsteuerung:</strong> Klicken Sie auf das Mikrofonsymbol um Ihre Anweisung zu sprechen. Die automatische Sprachausgabe liest Fragen vor und startet automatisch die Aufnahme.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Manual Configuration with enhanced section headers -->
+                    <div id="content-manual" class="tab-content">
+                        <form id="ogc-form">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-lg font-semibold border-b pb-2 mb-4 text-gray-800 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                    </svg>
+                                    1. Geodienst und Objekte auswählen
+                                </h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="geoserver-select" class="block text-sm font-medium text-gray-700 mb-1">GeoServer WFS Dienst</label>
+                                            <div class="flex items-center space-x-2">
+                                                <select id="geoserver-select" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 bg-white">
+                                                    <option value="https://sgx.geodatenzentrum.de/wfs_vg250" data-type="json">Verwaltungsgebiete (BKG) - JSON</option>
+                                                    <option value="https://geodienste.bfn.de/ogc/wfs/schutzgebiet" data-type="xml">Schutzgebiete (BfN) - XML/GML</option>
+                                                    <option value="https://sgx.geodatenzentrum.de/wfs_dlm250_inspire" data-type="xml">Landschaftsmodell (INSPIRE) - XML/GML</option>
+                                                </select>
+                                                <button type="button" id="fetch-layers-btn" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-semibold rounded-md hover:bg-gray-300 transition-colors">Laden</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="layer-name" class="block text-sm font-medium text-gray-700 mb-1">Layer-Name</label>
+                                            <select id="layer-name" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 bg-white" required>
+                                                <option value="" disabled selected>-- Server wählen & Layer laden --</option>
+                                            </select>
+                                            <p id="layer-loader" class="text-xs text-gray-500 mt-1 h-4"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-lg font-semibold border-b pb-2 mb-4 text-gray-800 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 010-11.314 8 8 0 0111.314 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        </svg>
+                                        2. Ortspunkt festlegen
+                                    </h3>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="latitude" class="block text-sm font-medium text-gray-700 mb-1">Breitengrad (Lat)</label>
+                                            <input type="number" step="any" id="latitude" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" placeholder="51.0036" value="51.0036" required>
+                                        </div>
+                                        <div>
+                                            <label for="longitude" class="block text-sm font-medium text-gray-700 mb-1">Längengrad (Lon)</label>
+                                            <input type="number" step="any" id="longitude" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" placeholder="13.8713" value="13.8713" required>
+                                        </div>
+                                    </div>
+                                     <p class="text-xs text-gray-500 mt-2">Klicken Sie auf die Karte, um die Koordinaten automatisch zu füllen.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-lg font-semibold border-b pb-2 mb-4 text-gray-800 flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                        </svg>
+                                        3. Suchbereich festlegen
+                                    </h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="maxSearchDistance" class="block text-sm font-medium text-gray-700 mb-1">Max. Such-Abstand (Meter) *</label>
+                                            <input type="number" min="1" max="1000000" id="maxSearchDistance" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" value="1000" required>
+                                            <p class="text-xs text-gray-500 mt-1">Nur Features innerhalb dieser Distanz werden angezeigt und gemessen.</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="maxFeaturesEnabled" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                            <label for="maxFeaturesEnabled" class="ml-2 block text-sm text-gray-700">
+                                                Max. Features aktivieren (standardmäßig deaktiviert)
+                                            </label>
+                                        </div>
+                                        <div id="maxFeaturesGroup" class="ml-6" style="display: none;">
+                                            <label for="maxFeatures" class="block text-sm font-medium text-gray-700 mb-1">Maximale Anzahl Features</label>
+                                            <input type="number" min="1" max="10000" id="maxFeatures" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" value="100" placeholder="100">
+                                            <p class="text-xs text-gray-500 mt-1">Reduziert die Anzahl der zurückgegebenen Features zur Verbesserung der Performance bei Schutzgebieten und Verwaltungsgebieten.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8">
+                                <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 shadow-md">
+                                    Suche & Prüfung starten
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Tab 3: Compliance/Inspection Regulation -->
+                    <div id="content-compliance" class="tab-content">
+                        <div class="space-y-4">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5-3L9 22l-6-6 11-11z"></path>
+                                    </svg>
+                                </div>
+                                <h2 class="text-xl font-bold text-gray-900">Prüfvorschrift</h2>
+                            </div>
+
+                            <div>
+                                <label for="compliance-rule" class="block text-sm font-medium text-gray-700 mb-1">Prüfvorschrift</label>
+                                <div class="relative">
+                                    <textarea id="compliance-rule" rows="3" class="w-full px-3 py-2 pr-20 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                                              placeholder="Objekt darf nicht mehr als 1000m entfernt von einem Schutzgebiet oder Ortschaft sein."></textarea>
+                                    <button
+                                        type="button"
+                                        id="speak-compliance-btn"
+                                        class="absolute right-2 top-2 p-1 rounded-full bg-blue-500 hover:bg-blue-600 transition-all duration-200"
+                                        title="Frage vorlesen"
+                                    >
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 11v2c0 1.1.9 2 2 2h2.1l5.9 4V7l-5.9 4H5c-1.1 0-2 .9-2 2z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8c1.5 1 1.5 5 0 6"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 6c2.5 1.5 2.5 8.5 0 10"/>
+                                        </svg>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        id="voice-compliance-btn"
+                                        class="absolute right-10 top-2 p-1 rounded-full bg-purple-500 hover:bg-purple-600 transition-all duration-200"
+                                        title="Spracheingabe für Prüfvorschrift verwenden"
+                                    >
+                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Diese Regel wird von der KI zur Bewertung der Messergebnisse verwendet. Verwenden Sie Sprachsteuerung für hands-free Eingabe.</p>
+                            </div>
+
+                            <div id="compliance-voice-recording-status" class="hidden mt-2 flex items-center gap-2 text-purple-600 bg-purple-50 p-2 rounded-lg">
+                                <svg class="w-4 h-4 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="8"></circle>
+                                </svg>
+                                <span class="text-sm font-medium">Aufnahme läuft... <span id="compliance-recording-timer">0</span>s</span>
+                                <button
+                                    id="stop-compliance-voice-btn"
+                                    class="ml-auto text-purple-700 hover:text-purple-800 font-medium text-sm"
+                                >
+                                    Stop
+                                </button>
+                            </div>
+
+                            <div id="compliance-voice-speaking-status" class="hidden mt-2 flex items-center gap-2 text-blue-600 bg-blue-50 p-2 rounded-lg">
+                                <svg class="w-4 h-4 animate-pulse text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="8"></circle>
+                                </svg>
+                                <span class="ml-1 text-xs text-blue-600 font-medium">Sprachausgabe aktiv...</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 p-3 rounded-md border border-gray-200">
+                                <input type="checkbox" id="auto-compliance-check" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="auto-compliance-check" class="text-sm text-gray-700 font-medium">
+                                    Anwendung der Prüfvorschrift nach Suche
+                                </label>
+                            </div>
+
+                            <p class="text-xs text-gray-500 mt-2">Definieren Sie oben Ihre Prüfvorschrift. Die Compliance-Bewertung erfolgt nach jeder Messung automatisch.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right Column: Map (60-70% width) -->
+            <div class="lg:col-span-3 bg-white p-2 rounded-xl shadow-lg">
+                <div id="map"></div>
+            </div>
+        </div>
+
+        <!-- Results Section below main layout -->
+        <div id="result-container" class="mt-8 bg-white p-6 rounded-xl shadow-lg border border-gray-200 hidden">
+        </div>
+
+        <!-- KI-Compliance Results Section - placed below measurement results -->
+        <div id="compliance-result" class="mt-4 bg-white p-6 rounded-xl shadow-lg border border-gray-200 hidden">
+            <h4 class="font-semibold mb-2 flex items-center">
+                <span class="mr-2">🤖</span>
+                <span>KI-Compliance Bewertung:</span>
+            </h4>
+            <div id="compliance-result-content" class="text-sm"></div>
+        </div>
+
+        <div id="xml-output-container" class="mt-4 bg-white p-6 rounded-xl shadow-lg hidden">
+            <label for="xml-output" class="block text-sm font-medium text-gray-700 mb-1">Empfangene Server-Antwort:</label>
+            <textarea id="xml-output" rows="10" class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md font-mono text-xs" readonly></textarea>
+        </div>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+
+</body>
+</html>

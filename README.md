@@ -47,7 +47,6 @@ ogc-distance-measurement-tool/
 ├── package-lock.json      # Lockfile for exact dependency versions
 ├── vite.config.js         # Vite build configuration
 ├── .gitignore            # Git ignore files
-├── cleanup-git-history.md # Git history cleanup notes
 └── todo.md               # Project todo list
 ```
 

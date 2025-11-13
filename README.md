@@ -30,19 +30,25 @@ This tool allows users to measure distances from a specific point to all feature
 ```
 ogc-distance-measurement-tool/
 ├── index.html              # Main UI
-├── js/
-│   └── main.js            # JavaScript logic
+├── src/
+│   ├── main.js            # Main JavaScript logic
+│   ├── DistanceCalculator.js # Distance calculation utilities
+│   └── ai-prompts.js      # AI prompt templates and configuration
 ├── css/
 │   └── styles.css         # Styles and Tailwind integration
 ├── config/
 │   └── config.json        # Configuration, server URLs, layer maps
+├── public/                # Static assets (currently empty)
 ├── LICENSE                # MIT License
 ├── README.md              # Documentation
 ├── SECURITY.md            # Security notes for API keys
 ├── THANKS.md             # Attribution and acknowledgments
 ├── package.json           # Dependencies and build scripts
+├── package-lock.json      # Lockfile for exact dependency versions
+├── vite.config.js         # Vite build configuration
 ├── .gitignore            # Git ignore files
-└── vite.config.js        # Vite build configuration (optional)
+├── cleanup-git-history.md # Git history cleanup notes
+└── todo.md               # Project todo list
 ```
 
 ## 🚀 Installation and Usage

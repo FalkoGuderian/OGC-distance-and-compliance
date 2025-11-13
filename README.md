@@ -5,6 +5,13 @@ A web-based tool for measuring distances to geographic features via OGC Web Feat
 ## 🚀 Overview
 
 This tool allows users to measure distances from a specific point to all features of a WFS layer within a defined search distance. User input is facilitated by AI support for natural language queries and automatic parameter extraction.
+**AI Assistant**
+<img width="990" height="633" alt="image" src="https://github.com/user-attachments/assets/3bdf6bd0-37ad-4ab6-9292-69d0ad364d61" />
+**Distance Measurement**
+<img width="991" height="748" alt="image" src="https://github.com/user-attachments/assets/afb444bd-5b6d-460e-9d27-cb1d775477b8" />
+**Compliance Checking**
+<img width="992" height="826" alt="image" src="https://github.com/user-attachments/assets/c30e26b8-86aa-46ac-b1db-1b4a77a219b9" />
+
 
 ## ✨ Features
 

@@ -89,7 +89,7 @@ Antworten Sie nur mit dem JSON-Objekt, ohne zusätzlichen Text.`;
  * Default model configuration for AI requests
  */
 export const AI_CONFIG = {
-    model: 'x-ai/grok-4-fast:free',
+    model: 'x-ai/grok-4-fast',
     temperature: 0.1,
     maxTokens: {
         parameterExtraction: 500,

@@ -91,6 +91,8 @@ Available servers and layers are configured in `config/config.json`. Currently s
   - Municipalities, districts, federal states, etc.
 - **BfN Protected Areas** (`https://geodienste.bfn.de/ogc/wfs/schutzgebiet`)
   - Nature reserves, national parks, etc.
+- **BKG Landscape Model DLM250 INSPIRE** (`https://sgx.geodatenzentrum.de/wfs_dlm250_inspire`)
+  - Transport networks (roads, railways, air), hydrography, administrative units, protected sites
 
 ### AI Integration
 
@@ -188,7 +190,7 @@ Thanks to all open-source projects and data providers that make this tool possib
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
 - [OpenStreetMap](https://www.openstreetmap.org/) - Base map data
 - [BfN](https://www.bfn.de/) - Protected areas Germany
-- [BKG](https://www.geodatenzentrum.de/) - Administrative areas Germany
+- [BKG](https://www.geodatenzentrum.de/) - Administrative areas and landscape model data Germany
 
 A complete list of all dependencies and data sources can be found in [THANKS.md](THANKS.md).
 

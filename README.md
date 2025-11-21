@@ -12,6 +12,8 @@ Dieses Tool ermöglicht es Benutzern, geografische Objekte über OGC Web Feature
 
 Die Anwendung ist deployed und sofort benutzbar ohne lokale Installation.
 
+<img alt="Demo" src="demo.gif" width="100%">
+
 ### Suchassistent
 
 <img width="741" height="683" alt="image" src="https://github.com/user-attachments/assets/e9164d18-5624-4972-80f5-7c3e08626536" />

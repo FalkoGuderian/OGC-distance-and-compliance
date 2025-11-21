@@ -8,7 +8,7 @@ Dieses Tool ermöglicht es Benutzern, Abstände von einem bestimmten Punkt zu al
 
 ## 🌐 Live Demo
 
-**Testen Sie das Tool online:** https://ogc-distance-and-compliance.onrender.com/
+**Testen Sie das Tool online:** [https://ogc-distance-and-compliance.onrender.com/](https://geo-search-and-compliance-check.onrender.com)
 
 Die Anwendung ist deployed und sofort benutzbar ohne lokale Installation.
 
@@ -172,7 +172,7 @@ Compliance rules can be defined in `config/config.json`:
 
 ### Live Demo
 
-The application is deployed and live at: **https://ogc-distance-and-compliance.onrender.com/**
+The application is deployed and live at: **[https://ogc-distance-and-compliance.onrender.com/](https://geo-search-and-compliance-check.onrender.com)**
 
 ### Automatic Deployment (Render.com)
 

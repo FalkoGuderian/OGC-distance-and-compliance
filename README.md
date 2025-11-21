@@ -1,6 +1,6 @@
-# OGC Distance Measurement and Compliance Check
+# Geo-Suche und Compliance Check
 
-Eine webbasierte Anwendung zur Messung von Abständen zu geografischen Objekten über OGC Web Feature Services (WFS) mit KI-gestützter Unterstützung und automatischer Compliance-Prüfung.
+Eine webbasierte Anwendung zur Suche von geografischen Objekten über OGC Web Feature Services (WFS) mit KI-gestützter Unterstützung und automatischer Compliance-Prüfung.
 
 ## 🚀 Überblick
 

@@ -39,6 +39,8 @@ Die Anwendung ist deployed und sofort benutzbar ohne lokale Installation.
 | Finde alle Naturschutzgebiete 10000m von der Stadtmitte Dresden entfernt | Visualisiert alle Naturschutzgebiete innerhalb 10km von Dresden-Mitte mit automatisierten Compliance-Indikatoren <br> <img height="250" alt="image" src="https://github.com/user-attachments/assets/dba5fda4-5b1a-47e0-a9a4-887bb67d0798" />|
 | Finde alle Bahnhöfe in Freital | Anzeige aller Bahnhofs-Knoten im Stadtgebiet Freital mit interaktiven Popups und Lagebezügen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/4435a4da-487f-428c-b6e5-cc0d2c9b65c3" />|
 | Finde alle Flugplätze im Großraum Leipzig, Chemnitz und Dresden | <img height="250" alt="image" src="https://github.com/user-attachments/assets/ee869e2e-9c3e-4bb4-b536-02088225943e" /> |
+| Wo sind Vögel in Dresden und Umgebung geschützt | <img height="250" alt="image" src="https://github.com/user-attachments/assets/005d1a77-0cc5-4c9b-9eed-951b358396b2" /> |
+
 
 ## 🏗️ Architecture
 

@@ -2631,7 +2631,8 @@ fetchLayers();
         const containingStyle = { color: "#22c55e", weight: 4, opacity: 0.8, fillOpacity: 0.3 };
         const nearbyStyle = { color: "#3b82f6", weight: 3, opacity: 0.8, fillOpacity: 0.2 };
 
-        let bounds = L.latLngBounds([[lat, lon]]);
+        // Calculate bounds manually from all feature coordinates for reliable coverage
+        let allLatLngs = [[lat, lon]];
 
         featuresWithDistances.forEach(item => {
             const style = item.isContaining ? containingStyle : nearbyStyle;
@@ -2652,9 +2653,10 @@ fetchLayers();
 
             featuresLayer.addLayer(featureLayer);
 
-            // Add to bounds
-            if (featureLayer.getBounds) {
-                bounds.extend(featureLayer.getBounds());
+            // Extract all coordinates from the feature to build comprehensive bounds
+            if (item.feature && item.feature.geometry) {
+                const coords = extractAllCoordinates(item.feature.geometry);
+                allLatLngs = allLatLngs.concat(coords);
             }
 
             // Only add distance markers in final visualization or if explicitly requested
@@ -2689,10 +2691,74 @@ fetchLayers();
             }
         });
 
-        // Fit map to show all features
-        if (bounds.isValid()) {
-            map.fitBounds(bounds.pad(0.1));
+        // Fit map to show all features - use comprehensive bounds calculation
+        if (allLatLngs.length > 1) {
+            // Filter out any invalid coordinates
+            const validLatLngs = allLatLngs.filter(([lat, lng]) =>
+                !isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180
+            );
+
+            if (validLatLngs.length > 0) {
+                const bounds = L.latLngBounds(validLatLngs);
+                if (bounds.isValid()) {
+                    // Use a timeout to ensure DOM is fully ready and force map resize before fitting
+                    setTimeout(() => {
+                        try {
+                            map.invalidateSize();
+                            map.fitBounds(bounds.pad(0.15)); // Increased padding for better coverage
+                        } catch (error) {
+                            console.warn('Error fitting bounds:', error);
+                            // Fallback with force resize
+                            setTimeout(() => {
+                                map.invalidateSize();
+                                map.setView([lat, lon], 9);
+                            }, 100);
+                        }
+                    }, 100);
+                } else {
+                    setTimeout(() => {
+                        map.invalidateSize();
+                        map.setView([lat, lon], 9);
+                    }, 100);
+                }
+            } else {
+                setTimeout(() => {
+                    map.invalidateSize();
+                    map.setView([lat, lon], 9);
+                }, 100);
+            }
+        } else {
+            // Only the search point exists
+            setTimeout(() => {
+                map.invalidateSize();
+                map.setView([lat, lon], 10);
+            }, 100);
         }
+    }
+
+    // Helper function to extract all coordinates from a GeoJSON geometry
+    function extractAllCoordinates(geometry) {
+        const coordinates = [];
+
+        function extractCoords(coords, depth = 0) {
+            if (depth > 3) return; // Prevent excessive recursion
+
+            if (Array.isArray(coords[0])) {
+                coords.forEach(coord => extractCoords(coord, depth + 1));
+            } else if (coords.length >= 2) {
+                // GeoJSON: [longitude, latitude] - convert to Leaflet [latitude, longitude]
+                const [lng, lat] = coords;
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    coordinates.push([lat, lng]);
+                }
+            }
+        }
+
+        if (geometry && geometry.coordinates) {
+            extractCoords(geometry.coordinates);
+        }
+
+        return coordinates;
     }
 
     function visualizeMultipleFeatures(featuresWithDistances, coordinatePoint, lat, lon) {

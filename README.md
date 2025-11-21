@@ -40,7 +40,7 @@ Die Anwendung ist deployed und sofort benutzbar ohne lokale Installation.
 | Finde alle Bahnhöfe in Freital | Anzeige aller Bahnhofs-Knoten im Stadtgebiet Freital mit interaktiven Popups und Lagebezügen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/4435a4da-487f-428c-b6e5-cc0d2c9b65c3" />|
 | Finde alle Flugplätze im Großraum Leipzig, Chemnitz und Dresden | <img height="250" alt="image" src="https://github.com/user-attachments/assets/ee869e2e-9c3e-4bb4-b536-02088225943e" /> |
 | Wo sind Vögel in Dresden und Umgebung geschützt | <img height="250" alt="image" src="https://github.com/user-attachments/assets/005d1a77-0cc5-4c9b-9eed-951b358396b2" /> |
-
+| Zeige alle Gemeinden in 20 km um Dresden | <img height="250" alt="image" src="https://github.com/user-attachments/assets/fabb1daf-7e91-4e66-a5d0-19eb2f30fb2e" /> |
 
 ## 🏗️ Architecture
 

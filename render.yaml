@@ -1,8 +1,13 @@
-services:
-  - type: web
-    name: ogc-distance-and-compliance
-    runtime: static
-    staticPath: dist
-    headers:
-      - path: assets/*.css
-        name: Content-Type
+version: "1"
+projects:
+- name: Geo Search and Compliance
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: Geo Search and Compliance Check
+      runtime: static
+      repo: https://github.com/FalkoGuderian/geo-search-and-compliance
+      buildCommand: npm run build
+      staticPublishPath: dist
+      autoDeployTrigger: commit

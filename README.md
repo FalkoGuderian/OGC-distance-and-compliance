@@ -60,7 +60,7 @@ Die Anwendung ist deployed und sofort benutzbar ohne lokale Installation.
 
 | ✈️ Flugplätze Sachsen                                                                                                                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Suchanfrage:** "Finde alle Flugplätze im Großraum Leipzig, Chemnitz und Dresden" <br>**Beschreibung:** Visualisiert alle Flugplätze (AerodromeArea) im Mehrstadtbereich mit interaktiven Lageinformationen |
+| **Suchanfrage:** "Finde alle Flugplätze im Großraum Leipzig, Chemnitz und Dresden" <br>**Beschreibung:** Visualisiert alle Flugplätze (AerodromeArea) im Mehrstadtbereich |
 | <img height="200" alt="Flugplätze Sachsen" src="https://github.com/user-attachments/assets/ee869e2e-9c3e-4bb4-b536-02088225943e" />                                                                                        |
 
 </div>

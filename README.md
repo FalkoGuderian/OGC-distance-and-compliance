@@ -13,12 +13,15 @@ Dieses Tool ermöglicht es Benutzern, geografische Objekte über OGC Web Feature
 Die Anwendung ist deployed und sofort benutzbar ohne lokale Installation.
 
 ### Suchassistent
+
 <img width="741" height="683" alt="image" src="https://github.com/user-attachments/assets/e9164d18-5624-4972-80f5-7c3e08626536" />
 
 ### Manuelle Eingabe
+
 <img width="745" height="593" alt="image" src="https://github.com/user-attachments/assets/6b09545e-1fed-4714-90f4-2b8e4e11234d" />
 
 ### Compliance-Prüfung
+
 <img width="742" height="721" alt="image" src="https://github.com/user-attachments/assets/8b8816ec-b372-45cb-a17b-88dc1bc8d4de" />
 
 ## ✨ Funktionen
@@ -33,17 +36,34 @@ Die Anwendung ist deployed und sofort benutzbar ohne lokale Installation.
 
 ## 🧪 Use Cases
 
-| Suchanfrage | Ergebniskarte |
-|-------------|---------------|
-| Zeige das Straßennetz von Dresden und Umgebung | Visualisierung des Straßennetzes (RoadLink) in Dresden und Umgebung mit detaillierten Straßenverbindungen und Verkehrswegen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/fdb3f9fb-22b7-4e82-af54-33a7535855a5" /> |
-| Schienennetz in Sachsen | Anzeige des kompletten Schienennetzes (RailwayLink) in Sachsen mit erweitertem Suchradius von 150km und zentriert südlich von Dresden für vollständige Eisenbahninfrastruktur-Übersicht <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/3311ce93-9d54-4dcd-b88e-78b0ca7459b7" /> |
-| Zeige alle Gemeinden in 20 km um Dresden | Darstellung aller Gemeinden (vg250:vg250_gem) im 20km-Radius um Dresden-Mitte mit Grenzvisualisierungen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/fabb1daf-7e91-4e66-a5d0-19eb2f30fb2e" /> |
-| Zeige alle Flüsse und Bäche in Dresden | Anzeige aller Fließgewässer (Watercourse) im Stadtgebiet Dresden mit Wasserkartierung <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/3581521e-91b1-45a2-bce2-857f631293a3" /> |
-| Finde alle Seen im Großraum Leipzig | Zeigt alle stehenden Gewässer (StandingWater) im 50km-Radius um Leipzig <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/a0abc666-6b6e-4e35-ae58-cf5db1fedb56" />|
-| Finde alle Bahnhöfe in Freital | Anzeige aller Bahnhofs-Knoten im Stadtgebiet Freital mit interaktiven Popups und Lagebezügen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/4435a4da-487f-428c-b6e5-cc0d2c9b65c3" />|
-| Wo sind Vögel in Dresden und Umgebung geschützt | Anzeige aller Vogelschutzgebiete in Dresden und Umgebung mit detaillierten Schutzgebietsinformationen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/005d1a77-0cc5-4c9b-9eed-951b358396b2" /> |
-| Finde alle Naturschutzgebiete 10000m von der Stadtmitte Dresden entfernt | Visualisiert alle Naturschutzgebiete innerhalb 10km von Dresden-Mitte <br> <img height="250" alt="image" src="https://github.com/user-attachments/assets/dba5fda4-5b1a-47e0-a9a4-887bb67d0798" />|
-| Finde alle Flugplätze im Großraum Leipzig, Chemnitz und Dresden | Visualisiert alle Flugplätze (AerodromeArea) im Mehrstadtbereich mit interaktiven Lageinformationen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/ee869e2e-9c3e-4bb4-b536-02088225943e" /> |
+<div align="center">
+
+| 🗺️ Straßennetz Dresden                                                                                                                                                                                                              | 🚂 Schienennetz Sachsen                                                                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Suchanfrage:** "Zeige das Straßennetz von Dresden und Umgebung" `<br>`**Beschreibung:** Visualisierung des Straßennetzes (RoadLink) in Dresden und Umgebung mit detaillierten Straßenverbindungen und Verkehrswegen | **Suchanfrage:** "Schienennetz in Sachsen" `<br>`**Beschreibung:** Anzeige des kompletten Schienennetzes (RailwayLink) in Sachsen mit erweitertem Suchradius von 150km und zentriert südlich von Dresden für vollständige Eisenbahninfrastruktur-Übersicht |
+| `<img height="200" alt="Straßennetz Dresden" src="https://github.com/user-attachments/assets/fdb3f9fb-22b7-4e82-af54-33a7535855a5" />`                                                                                              | `<img height="200" alt="Schienennetz Sachsen" src="https://github.com/user-attachments/assets/3311ce93-9d54-4dcd-b88e-78b0ca7459b7" />`                                                                                                                                    |
+
+| 🏛️ Gemeinden Dresden                                                                                                                                                                                    |  🌊 Flüsse und Bäche Dresden                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Suchanfrage:** "Zeige alle Gemeinden in 20 km um Dresden" `<br>`**Beschreibung:** Darstellung aller Gemeinden (vg250:vg250_gem) im 20km-Radius um Dresden-Mitte mit Grenzvisualisierungen | **Suchanfrage:** "Zeige alle Flüsse und Bäche in Dresden" `<br>`**Beschreibung:** Anzeige aller Fließgewässer (Watercourse) im Stadtgebiet Dresden mit Wasserkartierung |
+| `<img height="200" alt="Gemeinden Dresden" src="https://github.com/user-attachments/assets/fabb1daf-7e91-4e66-a5d0-19eb2f30fb2e" />`                                                                    | `<img height="200" alt="Flüsse Dresden" src="https://github.com/user-attachments/assets/3581521e-91b1-45a2-bce2-857f631293a3" />`                                                      |
+
+| 🏞️ Seen Leipzig                                                                                                                                                      |  🚉 Bahnhöfe Freital                                                                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Suchanfrage:** "Finde alle Seen im Großraum Leipzig" `<br>`**Beschreibung:** Zeigt alle stehenden Gewässer (StandingWater) im 50km-Radius um Leipzig | **Suchanfrage:** "Finde alle Bahnhöfe in Freital" `<br>`**Beschreibung:** Anzeige aller Bahnhofs-Knoten im Stadtgebiet Freital mit interaktiven Popups und Lagebezügen |
+| `<img height="200" alt="Seen Leipzig" src="https://github.com/user-attachments/assets/a0abc666-6b6e-4e35-ae58-cf5db1fedb56" />`                                      | `<img height="200" alt="Bahnhöfe Freital" src="https://github.com/user-attachments/assets/4435a4da-487f-428c-b6e5-cc0d2c9b65c3" />`                                                 |
+
+| 🐦 Vogelschutz Dresden                                                                                                                                                                                           | ### 🌱 Naturschutz Dresden                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Suchanfrage:** "Wo sind Vögel in Dresden und Umgebung geschützt" `<br>`**Beschreibung:** Anzeige aller Vogelschutzgebiete in Dresden und Umgebung mit detaillierten Schutzgebietsinformationen | **Suchanfrage:** "Finde alle Naturschutzgebiete 10000m von der Stadtmitte Dresden entfernt" `<br>`**Beschreibung:** Visualisiert alle Naturschutzgebiete innerhalb 10km von Dresden-Mitte |
+| `<img height="200" alt="Vogelschutz Dresden" src="https://github.com/user-attachments/assets/005d1a77-0cc5-4c9b-9eed-951b358396b2" />`                                                                         | `<img height="200" alt="Naturschutz Dresden" src="https://github.com/user-attachments/assets/dba5fda4-5b1a-47e0-a9a4-887bb67d0798" />`                                                                |
+
+| ✈️ Flugplätze Sachsen                                                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Suchanfrage:** "Finde alle Flugplätze im Großraum Leipzig, Chemnitz und Dresden" `<br>`**Beschreibung:** Visualisiert alle Flugplätze (AerodromeArea) im Mehrstadtbereich mit interaktiven Lageinformationen |
+| `<img height="200" alt="Flugplätze Sachsen" src="https://github.com/user-attachments/assets/ee869e2e-9c3e-4bb4-b536-02088225943e" />`                                                                                        |
+
+</div>
 
 ## 🏗️ Architecture
 
@@ -197,6 +217,7 @@ This application is automatically deployed from GitHub via Render.com when chang
 The following configuration ensures proper deployment:
 
 **`render.yaml`** - Defines the Render service configuration:
+
 ```yaml
 services:
   - type: web
@@ -210,6 +231,7 @@ services:
 ```
 
 **`public/_headers`** - Sets custom HTTP headers for asset serving:
+
 ```
 /assets/*.css
   Content-Type: text/css
@@ -218,10 +240,12 @@ services:
 #### Build Configuration
 
 **Package.json build scripts:**
+
 - `npm run build`: Creates optimized production build in `dist/` folder
 - `npm run dev`: Starts local development server at `http://localhost:5173`
 
 **Vite Configuration (`vite.config.js`):**
+
 - External dependencies (Leaflet, Turf.js) loaded via CDN
 - Source maps enabled for debugging
 - Terser minification with console preservation
@@ -246,12 +270,14 @@ The service automatically redeploys when changes are pushed to the main branch o
 The generated files in the `dist/` folder can be deployed to any static web hoster (Netlify, Vercel, etc.).
 
 **For Netlify/Vercel:**
+
 ```bash
 npm run build
 # Deploy the dist/ folder contents
 ```
 
 **For GitHub Pages:**
+
 ```bash
 npm run build
 # Upload dist/ folder to GitHub Pages

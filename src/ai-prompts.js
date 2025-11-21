@@ -27,28 +27,33 @@ VERFÜGBARE WFS-DIENSTE UND LAYER-DETAILS:
 - Verwendung für: Umwelt-/Naturschutz-Bewertungen, Genehmigungen in Schutzgebieten
 
 🔵 LANDSCHAFTSMODELL DLM250 (INSPIRE) - https://sgx.geodatenzentrum.de/wfs_dlm250_inspire
-- ENTFERNETE LAYER im Landschaftsmodell:
-  * "dlmlpz250:TR_Landcover" - Landbedeckung (/Vegetation)
-  * "dlmlpz250:TN_Punktort" - Punktförmige Orte (/Bahnhof, Aussichtspunkt)
-  * "dlmlpz250:BU_Gebäude" - Gebäude (/Schule, Rathaus, Fabrik)
 - WASSER Layer:
-  * "dlmlpz250:GE_Gewässer" - Gewässerbereiche (/See, Stausee, Weiher)
-  * "dlmlpz250:LN_Gewässer" - Fließgewässer (/Fluss, Bach, Kanal)
+  * "hy-p:StandingWater" - Stehendes Gewässer (Seen, Teiche, Stauseen)
+  * "hy-p:Watercourse" - Wasserlauf (Flüsse, Bäche, Kanäle)
+  * "hy-p:LandWaterBoundary" - Land-Wasser-Grenze
+  * "hy-p:DamOrWeir" - Damm oder Wehr
+  * "hy-p:Falls" - Wasserfälle
+  * "hy-p:Shore" - Ufer
+  * "hy-p:Wetland" - Feuchtgebiet
 - VERKEHR Layer:
   * "tn-ra:RailwayStationNode" - Bahnhofs-Knoten (/Bahnhöfe, Haltestellen)
-  * "dlmlpz250:TN_Strasse" - Straßennetz (/Bundesstraße Bxxx, Autobahn Axxx)
-  * "dlmlpz250:TN_Hafen" - Hafenbereiche (/Hafen-Knoten, Hafen-Becken)
-- PUNKTORTE: Bahnhöfe, Aussichtspunkte, Denkmäler, Messpunkte
-- STRASSEN: Bundesstraßen (B), Landesstraßen (L), Kreisstraßen (K)
-- HÄFEN: Hafen-Knoten, Hafen-Becken, Kai-Bereiche
-- Verwendung für: Infrastruktur-Nähe, Verkampfung, Standortanalysen
+  * "tn-ro:Road" - Straßen
+  * "tn-ro:ERoad" - E-Straßen
+- TRANSPORT/INFRASTRUKTUR:
+  * "tn-w:PortArea" - Hafenbereich
+  * "tn-a:AerodromeArea" - Flugplatzbereich
+- BESTEHENDE OBJEKTE/VERWALTUNG:
+  * "au:AdministrativeUnit" - Verwaltungseinheit
+  * "au:AdministrativeBoundary" - Verwaltungsgrenze
+  * "ps:ProtectedSite" - Schutzgebiet
 
 BEISPIELE FÜR ANWENDUNGSFÄLLE:
-- "Entfernung zu Hafen": DLM250 → TN_Hafen (nicht Schutzgebiete!)
+- "Entfernung zu Hafen": DLM250 → PortArea (nicht Schutzgebiete!)
 - "Bahnhof in der Nähe": DLM250 → RailwayStationNode
-- "Straße finden": DLM250 → TN_Strasse
+- "Straße finden": DLM250 → Road
 - "Naturschutzgebiet prüfen": BfN-Schutzgebiete → Naturschutzgebiete
 - "Gemeindegrenze": BKG-Verwaltungsgebiete → vg250_gem
+- "Seen finden": DLM250 → StandingWater
 
 Benutzeranweisung: "${instruction}"
 
@@ -62,18 +67,22 @@ Bitte analysieren Sie die Anweisung und antworten Sie ausschließlich mit einem 
 }
 
 WICHTIGE AUSWAHLREGELN - BEFOLGEN SIE DIESE UNBEDINGT:
-- Für HÄFEN/HAFENBEREICHE/HAFEN-KNOTEN/KAI-BECKEN: IMMER DLM250 → "dlmlpz250:TN_Hafen" (NICHT Bahnhöfe!)
+- Für SEEN/TEICHE/STAUSEEN/GEWÄSSER: IMMER DLM250 → "hy-p:StandingWater" (NICHT Naturschutzgebiete!)
+- Für FLÜSSE/BÄCHE/KANÄLE: IMMER DLM250 → "hy-p:Watercourse"
+- Für HÄFEN/HAFENBEREICHE: IMMER DLM250 → "tn-w:PortArea" (NICHT Bahnhöfe!)
 - Für BAHNHOFE/BAHNEN/ZÜGE/EISENBAHN: IMMER DLM250 → "tn-ra:RailwayStationNode" (NICHT Häfen!)
-- Für STRASSEN/STRASSENNETZ/VERKEHRSWEGE: IMMER DLM250 → "dlmlpz250:TN_Strasse"
+- Für STRASSEN/STRASSENNETZ/VERKEHRSWEGE: IMMER DLM250 → "tn-ro:Road"
 - Für SCHUTZGEBIETE/NATURSCHUTZ/UMWELTZONEN: IMMER BfN → "bfn_sch_Schutzgebiet:Naturschutzgebiete"
 - Für VERWALTUNGSGEBIETE/GEMEINDEN/KREISE/STADTTEILE: IMMER BKG → "vg250:vg250_gem"
-- Bei KONTEXT "HAFEN": LAYER MUSS "TN_Hafen" sein, nicht "TN_Bahn" oder andere!
-- Bei ERWÄHNUNG VON "HAFEN"/"PORT"/"SCHIFF"/"WASSERTRANSPORT": IMMER "TN_Hafen"
+- Bei KONTEXT "SEEN"/"GEWÄSSER"/"WASSER": LAYER "hy-p:StandingWater"
+- Bei KONTEXT "HAFEN"/"PORT"/"SCHIFF"/"WASSERTRANSPORT": LAYER "tn-w:PortArea"
 
 SCHLÜSSELWORT-ABBILDUNG:
-- "HAFEN" → "dlmlpz250:TN_Hafen"
+- "SEE" → "hy-p:StandingWater"
+- "GEWÄSSER" → "hy-p:StandingWater"
+- "HAFEN" → "tn-w:PortArea"
 - "BAHNHOF" → "tn-ra:RailwayStationNode"
-- "STRAßE" → "dlmlpz250:TN_Strasse"
+- "STRAßE" → "tn-ro:Road"
 - "NATURSCHUTZGEBIET" → "bfn_sch_Schutzgebiet:Naturschutzgebiete"
 - "GEMEINDE" → "vg250:vg250_gem"
 

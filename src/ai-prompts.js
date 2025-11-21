@@ -22,6 +22,7 @@ VERFÜGBARE WFS-DIENSTE UND LAYER-DETAILS:
 
 🟡 SCHUTZGEBIETE (BfN) - https://geodienste.bfn.de/ogc/wfs/schutzgebiet
 - Layer: "bfn_sch_Schutzgebiet:Naturschutzgebiete" - Naturschutzgebiete
+- Layer: "bfn_sch_Schutzgebiet:Vogelschutzgebiete" - Vogelschutzgebiete
 - Layer: "bfn_sch_Schutzgebiet:Nationalparke" - Nationalparke
 - Layer: "bfn_sch_Schutzgebiet:Biosphärenreservate" - Biosphärenreservate
 - Verwendung für: Umwelt-/Naturschutz-Bewertungen, Genehmigungen in Schutzgebieten
@@ -48,6 +49,7 @@ VERFÜGBARE WFS-DIENSTE UND LAYER-DETAILS:
   * "ps:ProtectedSite" - Schutzgebiet
 
 BEISPIELE FÜR ANWENDUNGSFÄLLE:
+- "Wo sind Vögel geschützt": BfN → Vogelschutzgebiete (NICHT Naturschutzgebiete!)
 - "Entfernung zu Hafen": DLM250 → PortArea (nicht Schutzgebiete!)
 - "Bahnhof in der Nähe": DLM250 → RailwayStationNode
 - "Straße finden": DLM250 → Road
@@ -69,15 +71,20 @@ Bitte analysieren Sie die Anweisung und antworten Sie ausschließlich mit einem 
 WICHTIGE AUSWAHLREGELN - BEFOLGEN SIE DIESE UNBEDINGT:
 - Für SEEN/TEICHE/STAUSEEN/GEWÄSSER: IMMER DLM250 → "hy-p:StandingWater" (NICHT Naturschutzgebiete!)
 - Für FLÜSSE/BÄCHE/KANÄLE: IMMER DLM250 → "hy-p:Watercourse"
+- Für VÖGEL/VOGELSCHUTZ/AVIFAUNA: IMMER BfN → "bfn_sch_Schutzgebiet:Vogelschutzgebiete"
 - Für HÄFEN/HAFENBEREICHE: IMMER DLM250 → "tn-w:PortArea" (NICHT Bahnhöfe!)
 - Für BAHNHOFE/BAHNEN/ZÜGE/EISENBAHN: IMMER DLM250 → "tn-ra:RailwayStationNode" (NICHT Häfen!)
 - Für STRASSEN/STRASSENNETZ/VERKEHRSWEGE: IMMER DLM250 → "tn-ro:Road"
-- Für SCHUTZGEBIETE/NATURSCHUTZ/UMWELTZONEN: IMMER BfN → "bfn_sch_Schutzgebiet:Naturschutzgebiete"
+- Für SCHUTZGEBIETE/NATURSCHUTZ/UMWELTZONEN: IMMER BfN → "bfn_sch_Schutzgebiet:Naturschutzgebiete" (außer Vögel!)
 - Für VERWALTUNGSGEBIETE/GEMEINDEN/KREISE/STADTTEILE: IMMER BKG → "vg250:vg250_gem"
+- Bei KONTEXT "VÖGEL"/"VOGEL"/"VOGELSCHUTZ"/"AVIFAUNA": LAYER "bfn_sch_Schutzgebiet:Vogelschutzgebiete"
 - Bei KONTEXT "SEEN"/"GEWÄSSER"/"WASSER": LAYER "hy-p:StandingWater"
 - Bei KONTEXT "HAFEN"/"PORT"/"SCHIFF"/"WASSERTRANSPORT": LAYER "tn-w:PortArea"
 
 SCHLÜSSELWORT-ABBILDUNG:
+- "VOGEL" → "bfn_sch_Schutzgebiet:Vogelschutzgebiete"
+- "VÖGEL" → "bfn_sch_Schutzgebiet:Vogelschutzgebiete"
+- "VOGELSCHUTZ" → "bfn_sch_Schutzgebiet:Vogelschutzgebiete"
 - "SEE" → "hy-p:StandingWater"
 - "GEWÄSSER" → "hy-p:StandingWater"
 - "HAFEN" → "tn-w:PortArea"

@@ -41,7 +41,7 @@ Die Anwendung ist deployed und sofort benutzbar ohne lokale Installation.
 | Finde alle Flugplätze im Großraum Leipzig, Chemnitz und Dresden | Visualisiert alle Flugplätze (AerodromeArea) im Mehrstadtbereich mit interaktiven Lageinformationen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/ee869e2e-9c3e-4bb4-b536-02088225943e" /> |
 | Wo sind Vögel in Dresden und Umgebung geschützt | Anzeige aller Vogelschutzgebiete in Dresden und Umgebung mit detaillierten Schutzgebietsinformationen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/005d1a77-0cc5-4c9b-9eed-951b358396b2" /> |
 | Zeige alle Gemeinden in 20 km um Dresden | Darstellung aller Gemeinden (vg250:vg250_gem) im 20km-Radius um Dresden-Mitte mit Grenzvisualisierungen <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/fabb1daf-7e91-4e66-a5d0-19eb2f30fb2e" /> |
-| Zeige alle Flüsse und Bäche in Dresden | <img height="250" alt="image" src="https://github.com/user-attachments/assets/3581521e-91b1-45a2-bce2-857f631293a3" /> |
+| Zeige alle Flüsse und Bäche in Dresden | Anzeige aller Fließgewässer (Watercourse) im Stadtgebiet Dresden mit Wasserkartierung <br><img height="250" alt="image" src="https://github.com/user-attachments/assets/3581521e-91b1-45a2-bce2-857f631293a3" /> |
 
 ## 🏗️ Architecture
 

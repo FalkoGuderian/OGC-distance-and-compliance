@@ -38,7 +38,7 @@ VERFÜGBARE WFS-DIENSTE UND LAYER-DETAILS:
   * "hy-p:Wetland" - Feuchtgebiet
 - VERKEHR Layer:
   * "tn-ra:RailwayStationNode" - Bahnhofs-Knoten (/Bahnhöfe, Haltestellen)
-  * "tn-ro:Road" - Straßen
+  * "tn-ro:RoadLink" - Straßen-Verbindung (Straßennetz)
   * "tn-ro:ERoad" - E-Straßen
 - TRANSPORT/INFRASTRUKTUR:
   * "tn-w:PortArea" - Hafenbereich
@@ -74,7 +74,7 @@ WICHTIGE AUSWAHLREGELN - BEFOLGEN SIE DIESE UNBEDINGT:
 - Für VÖGEL/VOGELSCHUTZ/AVIFAUNA: IMMER BfN → "bfn_sch_Schutzgebiet:Vogelschutzgebiete"
 - Für HÄFEN/HAFENBEREICHE: IMMER DLM250 → "tn-w:PortArea" (NICHT Bahnhöfe!)
 - Für BAHNHOFE/BAHNEN/ZÜGE/EISENBAHN: IMMER DLM250 → "tn-ra:RailwayStationNode" (NICHT Häfen!)
-- Für STRASSEN/STRASSENNETZ/VERKEHRSWEGE: IMMER DLM250 → "tn-ro:Road"
+- Für STRASSEN/STRASSENNETZ/VERKEHRSWEGE: IMMER DLM250 → "tn-ro:RoadLink"
 - Für SCHUTZGEBIETE/NATURSCHUTZ/UMWELTZONEN: IMMER BfN → "bfn_sch_Schutzgebiet:Naturschutzgebiete" (außer Vögel!)
 - Für VERWALTUNGSGEBIETE/GEMEINDEN/KREISE/STADTTEILE: IMMER BKG → "vg250:vg250_gem"
 - Bei KONTEXT "VÖGEL"/"VOGEL"/"VOGELSCHUTZ"/"AVIFAUNA": LAYER "bfn_sch_Schutzgebiet:Vogelschutzgebiete"
@@ -89,7 +89,7 @@ SCHLÜSSELWORT-ABBILDUNG:
 - "GEWÄSSER" → "hy-p:StandingWater"
 - "HAFEN" → "tn-w:PortArea"
 - "BAHNHOF" → "tn-ra:RailwayStationNode"
-- "STRAßE" → "tn-ro:Road"
+- "STRAßE" → "tn-ro:RoadLink"
 - "NATURSCHUTZGEBIET" → "bfn_sch_Schutzgebiet:Naturschutzgebiete"
 - "GEMEINDE" → "vg250:vg250_gem"
 
